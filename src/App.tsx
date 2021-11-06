@@ -1,6 +1,8 @@
+import Encrypt from "./components/Encrypt";
+
 function App() {
   return (
-    
+    <Encrypt />
   );
 }
 

@@ -1,29 +1,32 @@
 import { useState, useEffect } from "react"
 import Cryptr from "cryptr";
 
-export default function Encrypt() {
+export default function Decrypt() {
     const [text, setText] = useState("");
     const [key, setKey] = useState("");
-    const [encrypted, setEncrypted] = useState("");
+    const [decrypted, setDecrypted] = useState("");
     const [loading, setLoading] = useState(false);
+    // add useEffect when the loading is true
     useEffect(() => {
         if (loading) {
-            const cryptr = new Cryptr(key);
-            const encrypted = cryptr.encrypt(text);
-            setEncrypted(encrypted)
-            setLoading(false);
+            try {
+                const cryptr = new Cryptr(key);
+                const encrypted = cryptr.decrypt(text);
+                setDecrypted(encrypted)
+                setLoading(false);
+            } catch (error) {
+                setLoading(false);
+                alert("Invalid key");
+            }
         }
     }, [loading]);
 
 
-    function encrypt() {
-        try {
-            setLoading(true);
+    function decrypt() {
 
-        } catch (error) {
-            console.log(error);
-            return "";
-        }
+        setLoading(true);
+
+
 
     }
 
@@ -33,7 +36,7 @@ export default function Encrypt() {
         <div className="container">
             <br />
             <div className="text-center">
-                <h1>Encrypt</h1>
+                <h1>Decrypt</h1>
             </div>
 
             <br />
@@ -48,18 +51,18 @@ export default function Encrypt() {
 
                 <div className="form-group">
                     <div className="text-center">
-                        <label htmlFor="text" className="h3">Text to Encrypt</label>
+                        <label htmlFor="text" className="h3">Encrytped Text</label>
                     </div>
 
                     <textarea className="form-control" id="text" rows={10} value={text} title="Text to Encrypt" onChange={(e) => setText(e.target.value)}></textarea>
                 </div>
 
-                <button type="button" className="btn btn-primary" onClick={() => encrypt()}>Encrypt</button>
+                <button type="button" className="btn btn-primary" onClick={() => decrypt()}>Decrypt</button>
 
             </form>
             <br />
             <div className="text-center">
-                <label htmlFor="encryptedText" className="h3">Encrypted Text</label>
+                <label htmlFor="encryptedText" className="h3">Decrypted Text</label>
             </div>
 
             {
@@ -69,7 +72,7 @@ export default function Encrypt() {
                             <span className="sr-only">Loading...</span>
                         </div>
                     </div> :
-                    <textarea className="form-control" id="encryptedText" rows={10} value={encrypted} title="Encrypted Text" disabled></textarea>
+                    <textarea className="form-control" id="encryptedText" rows={10} value={decrypted} title="Decrypted Text" disabled></textarea>
 
             }
 

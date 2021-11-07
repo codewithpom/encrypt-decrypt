@@ -13,7 +13,7 @@ export default function Encrypt() {
             setEncrypted(encrypted)
             setLoading(false);
         }
-    }, [loading]);
+    }, [loading, key, text]);
 
 
     function encrypt() {

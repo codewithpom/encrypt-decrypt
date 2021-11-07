@@ -19,7 +19,7 @@ export default function Decrypt() {
                 alert("Invalid key");
             }
         }
-    }, [loading]);
+    }, [loading, text, key]);
 
 
     function decrypt() {

@@ -42,6 +42,10 @@
     ]
   },
   "devDependencies": {
-    "@types/cryptr": "^4.0.1"
+    "@types/cryptr": "^4.0.1",
+  },
+  "browser": {
+    "crypto": false
   }
+  
 }
